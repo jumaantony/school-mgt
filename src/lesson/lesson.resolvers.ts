@@ -10,13 +10,10 @@ export class LessonResolver{
     ){}
 
     @Query(returns => LessonType)
-    lesson(){
-        return  {
-            id: "asdfasdf",
-            name: "Physics Class",
-            startDate: (new Date()).toISOString(),
-            endDate: (new Date()).toISOString()
-        }
+    lesson(
+        @Args('id') id: string,
+    ){
+        return this.lessonService.getLesson(id);
     }
 
 
