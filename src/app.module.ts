@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { LessonModule } from './lesson/lesson.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { LessonResolvers } from './lesson/lesson.resolvers';
+import { LessonResolver } from './lesson/lesson.resolvers';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Lesson } from './lesson/lesson.entity';
 
 @Module({
   imports: [
-
+    LessonModule,
     TypeOrmModule.forRoot({
       type: 'mongodb',
       url: 'mongodb://localhost/school',
@@ -21,9 +21,8 @@ import { Lesson } from './lesson/lesson.entity';
       autoSchemaFile: true,
       driver: ApolloDriver,
     }),
-    LessonModule,
   ],
   controllers: [],
-  providers: [LessonResolvers],
+  providers: [LessonResolver],
 })
 export class AppModule {}

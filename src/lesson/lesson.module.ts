@@ -1,7 +1,12 @@
 import { Module } from '@nestjs/common';
-import { LessonResolvers } from './lesson.resolvers';
+import { LessonResolver } from './lesson.resolvers';
+import { LessonService } from './lesson.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Lesson } from './lesson.entity';
 
-@Module({})
-export class LessonModule {
-    providers: [LessonResolvers]
-}
+@Module({
+  imports: [TypeOrmModule.forFeature([Lesson])],
+  providers: [LessonService, LessonResolver],
+  exports: [LessonService],
+})
+export class LessonModule {}
